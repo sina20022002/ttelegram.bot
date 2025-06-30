@@ -1,26 +1,19 @@
+import os
+import time
 import feedparser
 from telegram import Bot
-import time
 
-# توکن رباتت رو اینجا بذار
-TELEGRAM_TOKEN = '7420283992:AAHQFvJ_-JHHu8NuhkSm0noGQKwoBZxGh9s'
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("https://t.me/agbarsin_test")  # اینم از env بخون بهتره
 
-CHAT_ID = '@https://t.me/agbarsin_test'
-
-# آدرس RSS موردنظر
 RSS_URL = 'https://www.farsnews.ir/rss/politics'
-
-# برای جلوگیری از ارسال تکراری
 sent_links = set()
-
-# ساخت بات
 bot = Bot(token=TELEGRAM_TOKEN)
 
 def check_rss():
     feed = feedparser.parse(RSS_URL)
     for entry in feed.entries:
         if entry.link not in sent_links:
-            # ارسال خبر
             message = f"📰 {entry.title}\n{entry.link}"
             bot.send_message(chat_id=CHAT_ID, text=message)
             sent_links.add(entry.link)
@@ -28,4 +21,4 @@ def check_rss():
 if __name__ == "__main__":
     while True:
         check_rss()
-        time.sleep(60 * 1)
+        time.sleep(60 * 5)
