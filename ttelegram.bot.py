@@ -3,7 +3,7 @@ import time
 import feedparser
 from telegram import Bot
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TELEGRAM_TOKEN = os.getenv("tel:7420283992")
 CHAT_ID = os.getenv("https://t.me/agbarsin_test")  # اینم از env بخون بهتره
 
 RSS_URL = 'https://www.farsnews.ir/rss/politics'
